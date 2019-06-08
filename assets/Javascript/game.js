@@ -1,82 +1,27 @@
-document.onreadystatechange = function (){
-    if (document.readyState === "interactive"){
 
+let randomNumber = Math.floor(Math.random() * 102) + 19;
 
+let totalPoints = 0;
+let wins = 0;
+let losses = 0;
 
-        var targetNumber = Math.floor(Math.random()*102+19);
-        console.log(targetNumber)
+$("#rand-num").hmtl("<h2> + randomNumber + </h2> ");
 
+$(".crystal").on("click", function () {
+    totalPoints += parseInt(this.value);
+    $("total-score").text(totalPoints);
 
-        $("#number-to-guess").text(targetNumber);
-        $("#Player-Score").text(counter);
-
-
-        var counter = 0;
-        var playerscore = [] 
-   
-
-    
-
-        var numberOptions = 
-        
-        [
-        Math.floor(Math.random()*12+1), 
-        Math.floor(Math.random()*12+1), 
-        Math.floor(Math.random()*12+1), 
-        Math.floor(Math.random()*12+1)
-        ];
-        
-        
-
-        
-
-        
-
-        if( counter < targetNumber) {
-        $(".bluecrystal-image").on("click", function() {
-
-         
-            counter += numberOptions[0];
-            
-            alert('New score: ' + counter)
-
-            
-
-        })} 
-
-        $(".greencrystal-image").on("click", function() {
-
-         
-            counter += numberOptions[1];
-
-            alert("new score: " + counter); 
-            console.log(counter)
-
-        })}      
-
-        $(".redcrystal-image").on("click", function() {
-
-         
-            counter += numberOptions[2];
-
-            alert("new score: " + counter); 
-
-        });
-
-        $(".yellowcrystal-image").on("click", function() {
-
-         
-            counter += numberOptions[3];
-
-            alert("new score: " + counter); 
-
-        });
-
-    }
-    
-
-  
+    if (totalPoints === randomNumber) {
+        wins ++;
+        $("#wins").text("Wins: " + wins);
+        $("#game-result").text("You Win!");
         
     }
-    
-}
+
+    else if (totalPoints > randomNumber) {
+        losses ++;
+        $("#losses").text("Losses: " + losses);
+        $("game-result").text("You lose!");
+        reset();
+    }
+})
